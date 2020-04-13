@@ -1,4 +1,5 @@
 #Introduction:
+
 A Docker registry is a place where we can store images i.e. docker push, and let third-parties get them i.e. docker pull. 
 Docker Hub is the default registry. So, setting this local docker registry can help us to push/pull image with Kubernetes. 
 Below steps will use zero-downtime-rollingupdate service as an example to build the development image.
@@ -61,11 +62,11 @@ docker ps
 ```
 to check the registry container is running successfully.
 
-5. Create image tag for "zero-downtime-rollingupdate-img" worker from Mac machine, we use this image to push it to docker registry.
+5. Create image tag for "zero-downtime-rollingupdate-img" from machine, we use this image to push it to docker registry.
 ```
 $ docker tag zero-downtime-rollingupdate-img 192.150.23.217:5000/zero-downtime-rollingupdate:v1
 ```
--  "zero-downtime-rollingupdate-img" is the image name of this worker.
+-  "zero-downtime-rollingupdate-img" is the image name of this application.
 -  "192.150.23.217" is the ip address of docker registry machine. (The Ubuntu Linux VM or the Mac Machine)
 6. Run below command to push development image to docker registry.
 ```
@@ -84,7 +85,7 @@ Attached below setting as a reference.
 ```yaml
     spec:
       containers:
-      - name: background-removal
+      - name: zero-downtime-rollingupdate
         image: 192.150.23.217:5000/zero-downtime-rollingupdate:v1
         imagePullPolicy: Always
 
