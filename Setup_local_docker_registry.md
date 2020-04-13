@@ -1,10 +1,10 @@
-#Introduction:
+# Introduction:
 
 A Docker registry is a place where we can store images i.e. docker push, and let third-parties get them i.e. docker pull. 
 Docker Hub is the default registry. So, setting this local docker registry can help us to push/pull image with Kubernetes. 
 Below steps will use zero-downtime-rollingupdate service as an example to build the development image.
 
-##Precondition:
+### Precondition:
 1. Install docker on Mac laptop. In this page, we assume this Mac laptop is the primary development machine.
 2. Follow the steps from zero-downtime-rollingupdate repository to build the test docker image.
 3. Add the Insecure registries entry from the Docker desktop of Mac machine. 
@@ -24,11 +24,11 @@ Find the "InsecureRegisty" filed, and update the correct private docker image re
 Please refer below screenshots for reference.
 ![minikube_config](/images/docker-registry.png)
 
-##Steps to setup docker registry
+### Steps to setup docker registry
 Docker registry is just a Docker image, so we can just start the local docker registry via a running container. 
 Below are the steps to setting up a local docker registry.
 
-###Linux
+#### Linux
 1. Install a docker in a Ubuntu Linux VM by using command:
 ```
 $ sudo apt install docker.io. 
@@ -50,7 +50,7 @@ If this file does not exist, then create a new one, add below content into this 
 
 }
 ```
-###macOS
+#### macOS
 
 4. Run below command to launch a registry container with port 5000 from Ubuntu Linux VM or Mac machine.
 ```
