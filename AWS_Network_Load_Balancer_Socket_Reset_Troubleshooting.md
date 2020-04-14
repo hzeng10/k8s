@@ -29,7 +29,8 @@ determine the time, then we searched the preview requests from the same monolith
 We found the previous request was sent about 8 minutes ago.
 From AWS NLB documentation, we found that the NLB documented timeout behavior as below.
 ```
-Fr each request that a client makes through a Network Load Balancer, the state of that connection is tracked. The connection is terminated by the target. 
+For each request that a client makes through a Network Load Balancer, the state of that connection is tracked. 
+The connection is terminated by the target. 
 If no data is sent through the connection by either the client or target for longer than the idle timeout, the connection is closed. 
 If a client sends data after the idle timeout period elapses, it receives a TCP RST packet to indicate that the connection is no longer valid.
 ```
