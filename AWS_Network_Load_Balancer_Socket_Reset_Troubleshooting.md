@@ -54,3 +54,7 @@ In Linux, the default /proc/sys/net/ipv4/tcp_keepalive_time is 7200 (2 hours), w
 After making this change, we found the java socket reset exception was gone.
 ## References
 Tenable blog
+## Donate
+如果本仓库对你有帮助，可以请作者喝杯速溶咖啡
+
+![wechat_pay](/images/WeChatPay_2.jpeg)] 

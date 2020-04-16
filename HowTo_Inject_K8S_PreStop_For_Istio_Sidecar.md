@@ -94,6 +94,11 @@ Envoy proxy termination log:
 [Envoy (Epoch 0)] [2020-04-16 01:58:25.271][17][warning][main] [external/envoy/source/server/server.cc:513] caught SIGTERM
 [Envoy (Epoch 0)] [2020-04-16 01:58:25.271][17][warning][main] [external/envoy/source/server/server.cc:513] caught SIGTERM
 ```
+## Donate
+如果本仓库对你有帮助，可以请作者喝杯速溶咖啡
+
+![wechat_pay](/images/WeChatPay_2.jpeg)] 
+
  
 
 
