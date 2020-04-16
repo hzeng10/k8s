@@ -61,7 +61,7 @@ $ kubectl -n istio-system edit configmap istio-sidecar-injector
     }
  },
 ```
-![lifecyle_prestop](/images/lifecyle_prestop.png)
+![lifecyle_prestop](/images/lifecycle_prestop.png)
 
 4. Save this change to refresh the updated ConfigMap into k8s cluster.
 ## Deploy k8s application to verify the injected preStop
