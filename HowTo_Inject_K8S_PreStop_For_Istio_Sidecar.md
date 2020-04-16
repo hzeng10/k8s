@@ -97,7 +97,7 @@ Envoy proxy termination log:
 ## Donate
 如果本仓库对你有帮助，可以请作者喝杯速溶咖啡
 
-![wechat_pay](/images/WeChatPay_2.jpeg)] 
+![wechat_pay](/images/WeChatPay_2.jpeg) 
 
  
 
