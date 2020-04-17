@@ -38,7 +38,7 @@ $ kubectl label namespace default istio-injection=enabled
  
 namespace/default labeled
 ```
-## Inject PreStop into template YMAL
+## Inject PreStop into template yaml directly
 As mentioned early, the sidecar injection template yaml is presented as  k8s ConfigMap object, the name of this ConfigMap object is "istio-sidecar-injector". So we can edit the content of ConfigMap, add preStop hook for the injected envoy proxy. Please follow below steps:
 1. Use kubectl to edit configmap
 ```
@@ -64,6 +64,67 @@ $ kubectl -n istio-system edit configmap istio-sidecar-injector
 ![lifecyle_prestop](/images/lifecycle_prestop.png)
 
 4. Save this change to refresh the updated ConfigMap into k8s cluster.
+## Inject PreStop into template yaml by using annotation
+Inject the preStop into template yaml directly will require to apply the preStop for the entire k8s cluster.
+There is another option to inject the preStop by using annotation per each deployment. Each deployment can have its own preStop hook for the injected sidecar (Envoy proxy) or does not require it neither.
+In order to inject preStop for each deployment, we can take below steps:
+1. Use kubectl to edit configmap
+```
+$ kubectl -n istio-system edit configmap istio-sidecar-injector
+```
+2. Search of "lifecycle" from the vi windows, make changes as below. 
+The injected sidecar template will retrieve the 'sidecar.istio.io/preStopCommand' annotation from application deployment if annotation presents.
+```yaml
+{{- if .Values.global.proxy.lifecycle }}
+  lifecycle:
+    {{ toYaml .Values.global.proxy.lifecycle | indent 4 }}
+{{- else if isset .ObjectMeta.Annotations `sidecar.istio.io/preStopCommand` }}
+  lifecycle:
+    preStop:
+      exec:
+        command: ["/bin/bash", "-c", "{{ annotation .ObjectMeta `sidecar.istio.io/preStopCommand` `sleep 30` }}"]
+{{- end }}
+``` 
+3. Update the k8s application deployment to include the preStop annotation:
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-deployment
+spec:
+  selector:
+    matchLabels:
+      app: myapp
+  replicas: 1
+  template:
+    metadata:
+      # add the preStop annotation for the injected sidecar  
+      annotations:
+        sidecar.istio.io/preStopCommand: "while [ $(netstat -plunt | grep tcp | grep -v envoy | wc -l | xargs) -ne 0 ]; do sleep 30; done"
+      labels:
+        app: myapp
+    spec:
+      terminationGracePeriodSeconds: 32
+      containers:
+      - name: myapp
+        image: hzeng10-MacBook-Pro.local:5000/myapp:v1
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 0.5
+            memory: 256Mi
+          limits:
+            cpu: 0.75
+            memory: 300Mi
+        ports:
+        - containerPort: 8080
+        lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/bash", "-c", "sleep 30"]
+---
+```
+
 ## Deploy k8s application to verify the injected preStop
 1. Use kubectl apply command to deploy application into k8s cluster
 ```
