@@ -52,6 +52,27 @@ If we want to use NLB, then we should consider enabling the TCP keep alive, use 
 We should make sure set TPC keep alive value well under 350 seconds. 
 In Linux, the default /proc/sys/net/ipv4/tcp_keepalive_time is 7200 (2 hours), we can update this value like 60 seconds(which depend on services.)
 After making this change, we found the java socket reset exception was gone.
+## Solution for Istio Ingress gateway scenario
+If the AWS NLB is in front of Istio Ingress gateway, then it will require additional change from Istio Ingress gateway. 
+Istio Ingress gateway uses Envoy as a proxy. The Enovy idle timeout value is from setting "stream_idle_timeout" which is 0 by default.
+In order to apply the idle timeout for Ingress gateway, there is Environment variable "ISTIO_META_IDLE_TIMEOUT" to configure.   
+1. Use kubectl to edit the Ingress gateway deployment
+```
+kubectl edit deployment istio-ingressgateway -n istio-system
+```
+2. Add "ISTIO_META_IDLE_TIMEOUT" env under the env
+```yaml
+        env:
+        - name: ISTIO_META_IDLE_TIMEOUT
+          value: 60s
+        - name: JWT_POLICY
+          value: first-party-jwt
+        - name: PILOT_CERT_PROVIDER
+          value: istiod
+        - name: ISTIO_META_USER_SDS
+          value: "true"
+        ...  
+```
 ## References
 Tenable blog
 ## Donate
