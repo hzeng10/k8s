@@ -70,7 +70,7 @@ can help to make sure there is not any potential memory leak from this service.
 Attached a new splunk graph to show how many 503 error per day in a specified time range. After applying the fix, the 503 error was decreased to 0,
 which means this fix can help to resolve the issue.
  
-![Service-503-per-day-with-fix](/images/Service-503-per-day-with-fix.png)
+![Service-503-per-day-with-fix](/images/Service-503-per-day-with-fix-2.png)
 
 ## Donate
 如果本仓库对你有帮助，可以请作者喝杯速溶咖啡
