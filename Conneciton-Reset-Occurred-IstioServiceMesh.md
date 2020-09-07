@@ -1,5 +1,5 @@
 ## Overview
-Recently, there was another high number of connection reset exceptions occurred from production, as a result the microservice 
+Recently, there were another high number of connection reset exceptions occurred from Istio service mesh, as a result the microservice 
 authentication validation was failed. And this issue impacted most of services on production.
 This page discusses what's the root cause of this kind of connection reset exception, and how to resolve it.
 ## Problem
