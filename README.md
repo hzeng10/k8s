@@ -1,2 +1,2 @@
 # k8s
-Some notes of using k8s &amp; Istio
+Some notes of troubleshooting k8s &amp; Istio
