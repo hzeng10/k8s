@@ -101,8 +101,3 @@ After applying the fix on production on July 8 evening, the connection reset exc
 Attached below splunk query for a reference. This graph showed how many "connection reset" exception occurred per day per service in a specified time range.
 
 ![connection-reset-istio-2](/images/connection-reset-istio-2.png)
-
-## Donate
-如果本仓库对你有帮助，可以请作者喝杯速溶咖啡
-
-![wechat_pay](/images/WeChatPay_2.jpeg)
