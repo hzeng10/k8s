@@ -47,8 +47,3 @@ After applying the fix on July 15 evening, the HTTP 503 UC error was gone, and t
 Attached below splunk query for a reference. This graph showed how many "503 UC" error occurred per day per service in a specified time range.
 
 ![503UC-Error-Per-Service-Per-Day-Fix](/images/503UC-Error-Per-Service-Per-Day-Fix.png)
-
-## Donate
-如果本仓库对你有帮助，可以请作者喝杯速溶咖啡
-
-![wechat_pay](/images/WeChatPay_2.jpeg)
