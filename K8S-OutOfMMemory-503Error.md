@@ -72,7 +72,3 @@ which means this fix can help to resolve the issue.
  
 ![Service-503-per-day-with-fix](/images/Service-503-per-day-with-fix-2.png)
 
-## Donate
-如果本仓库对你有帮助，可以请作者喝杯速溶咖啡
-
-![wechat_pay](/images/WeChatPay_2.jpeg)
